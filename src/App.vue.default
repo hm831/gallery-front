@@ -1,0 +1,47 @@
+<script>
+import Masonry from './components/Masonry.vue';
+
+export default {
+  components: {
+    Masonry
+  }
+}
+</script>
+<template>
+  <a-layout>
+    <a-layout-header class="header">
+      <div class="logo">Gallery</div>
+    </a-layout-header>
+    <a-layout-content>
+      <a-layout style="background: #fff;">
+        <a-layout-sider width="180" :style="{height: '100vh', position: 'fixed', left: 0 }">
+          <a-menu :selectable="false" mode="inline" style="height: 100%; padding: 30px;">
+            <a-menu-item>
+              画廊
+            </a-menu-item>
+            <a-menu-item>
+              图集
+            </a-menu-item>
+          </a-menu>
+        </a-layout-sider>
+        <a-layout-content :style="{ padding: '24px 120px', minHeight: '280px' }">
+          <Masonry />
+        </a-layout-content>
+      </a-layout>
+    </a-layout-content>
+    <a-layout-footer style="text-align: center">
+      Gallery
+    </a-layout-footer>
+  </a-layout>
+</template>
+<style scoped>
+.logo {
+  color: white;
+  font-size: larger;
+}
+
+::v-deep(.ant-menu-item) {
+  font-size: x-large;
+  margin: 20px 0;
+}
+</style>
