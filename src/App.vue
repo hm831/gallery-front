@@ -44,9 +44,9 @@ export default {
     </a-layout>
 
     <!-- 页脚 -->
-    <a-layout-footer style="text-align: center; margin-left: 180px;">
+    <!-- <a-layout-footer style="text-align: center; margin-left: 180px;">
       Gallery
-    </a-layout-footer>
+    </a-layout-footer> -->
   </a-layout>
 </template>
 <style scoped>
