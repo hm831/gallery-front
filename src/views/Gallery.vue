@@ -1,36 +1,40 @@
-<script setup lang="ts">
-import { onMounted } from 'vue';
-
-const items = [
-    {
-        img: 'https://i.imgur.com/lnngStm.jpeg',
+<script>
+export default {
+    data() {
+        return {
+            loaded: false,
+            items: null
+        };
     },
-    {
-        img: 'https://i.imgur.com/q3JSHzR.jpeg',
+    mounted() {
+        fetch('http://127.0.0.1:8000/illusts/select?sfw=true&nsfw=true&r18=false&offset=0&limit=300')
+            .then(response => response.json())
+            .then((data) => {
+                this.items = data;
+                console.log(this.items)
+                this.loaded = true;
+            });
     },
-    {
-        img: 'https://i.imgur.com/nEcw0HV.png',
-    },
-    {
-        img: 'https://i.imgur.com/ZCnALW0.jpeg',
-    },
-];
-onMounted(() => {
-    const len = items.length;
-    for (var i = 0; i < len * 10; i++) {
-        const num = Math.floor(Math.random() * len);
-        items.push(items[num]);
-    }
-})
+};
 </script>
-
 <template>
-    <masonry-wall :items="items" :ssr-columns="1" :gap="7" 
-        :min-columns="3" :max-columns:="3" column-width="300">
-        <template #default="{ item, index }">
-            <div>
-                <img :src="item.img" style="width: 100%;">
-            </div>
+    <masonry-wall :items="items" :ssr-columns="1" :gap="7" :min-columns="4" :max-columns:="10" column-width="300"
+        v-if="loaded">
+        <template #default="{ item }">
+            <a-card hoverable>
+                <template #cover>
+                    <div style="overflow: hidden;">
+                        <img :alt="item.id" :src="item.link" style="width: 100%; 
+                        transition: transform 0.3s ease; border-radius: 0;">
+                    </div>
+                </template>
+            </a-card>
         </template>
     </masonry-wall>
 </template>
+
+<style>
+img:hover {
+    transform: scale(1.1);
+}
+</style>

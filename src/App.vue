@@ -1,10 +1,17 @@
 <script>
-import { PictureOutlined, FolderOutlined } from '@ant-design/icons-vue';
+import { PictureOutlined, FolderOutlined, HeartOutlined } from '@ant-design/icons-vue';
 
 export default {
   components: {
     PictureOutlined,
-    FolderOutlined
+    FolderOutlined,
+    HeartOutlined
+  },
+  data() {
+    return {
+      fontSize: '22px',
+      marginRight: '4px'
+    }
   }
 }
 </script>
@@ -21,12 +28,16 @@ export default {
         :style="{ height: '100vh', position: 'fixed', left: 0, top: '64px', background: '#fff' }">
         <a-menu :selectable="false" mode="inline" style="height: 100%; padding: 30px;">
           <a-menu-item>
-            <PictureOutlined />
+            <PictureOutlined :style="{fontSize: fontSize, marginRight: marginRight}"/>
             <RouterLink to="/">画廊</RouterLink>
           </a-menu-item>
           <a-menu-item>
-            <FolderOutlined />
-            <RouterLink to="/albums">图集</RouterLink>
+            <FolderOutlined :style="{fontSize: fontSize, marginRight: marginRight}"/>
+            <RouterLink to="/albums">作品</RouterLink>
+          </a-menu-item>
+          <a-menu-item>
+            <HeartOutlined :style="{fontSize: fontSize, marginRight: marginRight}"/>
+            <RouterLink to="/albums">写真</RouterLink>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>

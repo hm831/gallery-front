@@ -14,7 +14,7 @@ app.use(router);
 app.use(MasonryWall);
 app.mount('#app');
 
-const isDebug_mode = process.env.NODE_ENV !== 'production';
-Vue.config.debug = isDebug_mode;
-Vue.config.devtools = isDebug_mode;
-Vue.config.production = isDebug_mode;
+// const isDebug_mode = process.env.NODE_ENV !== 'production';
+// Vue.config.debug = isDebug_mode;
+// Vue.config.devtools = isDebug_mode;
+// Vue.config.production = isDebug_mode;
