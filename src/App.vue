@@ -19,9 +19,18 @@ export default {
     return {
       fontSize: '22px',
       marginRight: '4px',
+      loaded: false
     }
   },
   methods: {
+  },
+  computed: {
+    dropdownLoad() {
+      return this.$route.path === '/' ||
+        this.$route.path === '/home' ||
+        this.$route.path === '/stars' ||
+        this.$route.matched[0].path === '/albums/artworks/:id'
+    }
   }
 }
 </script>
@@ -33,26 +42,26 @@ export default {
         <a-col :span="20" style="padding-left: 2.5%;">
           <RouterLink to="/home" class="logo">Gallery</RouterLink>
         </a-col>
-        <a-col :span="4">
+        <a-col :span="4" v-if="dropdownLoad">
           <a-space size="large">
             <a-dropdown @select="handleSelect">
               <a-button class="item">列数</a-button>
               <template #content>
-                <a-doption>
-                  <RouterLink to="?columns=3" class="doption">3</RouterLink>
-                </a-doption>
-                <a-doption>
-                  <RouterLink to="?columns=4" class="doption">4</RouterLink>
-                </a-doption>
-                <a-doption>
-                  <RouterLink to="?columns=5" class="doption">5</RouterLink>
-                </a-doption>
-                <a-doption>
-                  <RouterLink to="?columns=6" class="doption">6</RouterLink>
-                </a-doption>
-                <a-doption>
-                  <RouterLink to="?columns=7" class="doption">7</RouterLink>
-                </a-doption>
+                <RouterLink to="?columns=3" class="doption">
+                  <a-doption>3</a-doption>
+                </RouterLink>
+                <RouterLink to="?columns=4" class="doption">
+                  <a-doption>4</a-doption>
+                </RouterLink>
+                <RouterLink to="?columns=5" class="doption">
+                  <a-doption>5</a-doption>
+                </RouterLink>
+                <RouterLink to="?columns=6" class="doption">
+                  <a-doption>6</a-doption>
+                </RouterLink>
+                <RouterLink to="?columns=7" class="doption">
+                  <a-doption>7</a-doption>
+                </RouterLink>
               </template>
             </a-dropdown>
             <a-button class="item">R-18</a-button>
@@ -65,23 +74,31 @@ export default {
       <!-- 固定侧边栏 -->
       <a-layout-sider width="220" :style="{ height: '100vh', position: 'fixed', left: 0, top: '64px' }">
         <a-menu :selectable="false" mode="inline" style="height: 100%; padding: 30px;">
-          <a-space direction="vertical">
-            <a-menu-item class="m-item">
-              <PictureOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
-              <RouterLink to="/home" class="menu-font">画廊</RouterLink>
-            </a-menu-item>
-            <a-menu-item class="m-item">
-              <FolderOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
-              <RouterLink to="/albums" class="menu-font">作品</RouterLink>
-            </a-menu-item>
-            <a-menu-item class="m-item">
-              <StarOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
-              <RouterLink to="/stars" class="menu-font">收藏</RouterLink>
-            </a-menu-item>
-            <a-menu-item class="m-item">
-              <HeartOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
-              <RouterLink to="/albums" class="menu-font">写真</RouterLink>
-            </a-menu-item>
+          <a-space direction="vertical" size="mini">
+            <RouterLink to="/home">
+              <a-menu-item class="m-item">
+                <PictureOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+                <span class="menu-font">画廊</span>
+              </a-menu-item>
+            </RouterLink>
+            <RouterLink to="/albums">
+              <a-menu-item class="m-item">
+                <FolderOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+                <span class="menu-font">作品</span>
+              </a-menu-item>
+            </RouterLink>
+            <RouterLink to="/stars">
+              <a-menu-item class="m-item">
+                <StarOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+                <span class="menu-font">收藏</span>
+              </a-menu-item>
+            </RouterLink>
+            <RouterLink to="/albums">
+              <a-menu-item class="m-item">
+                <HeartOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+                <span class="menu-font">写真</span>
+              </a-menu-item>
+            </RouterLink>
           </a-space>
         </a-menu>
       </a-layout-sider>
