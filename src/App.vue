@@ -1,17 +1,27 @@
 <script>
-import { PictureOutlined, FolderOutlined, HeartOutlined } from '@ant-design/icons-vue';
-
+import { PictureOutlined, FolderOutlined, HeartOutlined, StarOutlined } from '@ant-design/icons-vue';
 export default {
+  setup() {
+    const handleSelect = (v) => {
+      console.log(v)
+    };
+    return {
+      handleSelect
+    }
+  },
   components: {
     PictureOutlined,
     FolderOutlined,
-    HeartOutlined
+    HeartOutlined,
+    StarOutlined
   },
   data() {
     return {
       fontSize: '22px',
-      marginRight: '4px'
+      marginRight: '4px',
     }
+  },
+  methods: {
   }
 }
 </script>
@@ -19,26 +29,60 @@ export default {
   <a-layout>
     <!-- 固定头部 -->
     <a-layout-header class="header" :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
-      <div class="logo">Gallery</div>
+      <a-row style="margin-top: 0.7%;" align="end">
+        <a-col :span="20" style="padding-left: 2.5%;">
+          <RouterLink to="/home" class="logo">Gallery</RouterLink>
+        </a-col>
+        <a-col :span="4">
+          <a-space size="large">
+            <a-dropdown @select="handleSelect">
+              <a-button class="item">列数</a-button>
+              <template #content>
+                <a-doption>
+                  <RouterLink to="?columns=3" class="doption">3</RouterLink>
+                </a-doption>
+                <a-doption>
+                  <RouterLink to="?columns=4" class="doption">4</RouterLink>
+                </a-doption>
+                <a-doption>
+                  <RouterLink to="?columns=5" class="doption">5</RouterLink>
+                </a-doption>
+                <a-doption>
+                  <RouterLink to="?columns=6" class="doption">6</RouterLink>
+                </a-doption>
+                <a-doption>
+                  <RouterLink to="?columns=7" class="doption">7</RouterLink>
+                </a-doption>
+              </template>
+            </a-dropdown>
+            <a-button class="item">R-18</a-button>
+          </a-space>
+        </a-col>
+      </a-row>
     </a-layout-header>
 
     <a-layout>
       <!-- 固定侧边栏 -->
-      <a-layout-sider width="220"
-        :style="{ height: '100vh', position: 'fixed', left: 0, top: '64px', background: '#fff' }">
+      <a-layout-sider width="220" :style="{ height: '100vh', position: 'fixed', left: 0, top: '64px' }">
         <a-menu :selectable="false" mode="inline" style="height: 100%; padding: 30px;">
-          <a-menu-item>
-            <PictureOutlined :style="{fontSize: fontSize, marginRight: marginRight}"/>
-            <RouterLink to="/">画廊</RouterLink>
-          </a-menu-item>
-          <a-menu-item>
-            <FolderOutlined :style="{fontSize: fontSize, marginRight: marginRight}"/>
-            <RouterLink to="/albums">作品</RouterLink>
-          </a-menu-item>
-          <a-menu-item>
-            <HeartOutlined :style="{fontSize: fontSize, marginRight: marginRight}"/>
-            <RouterLink to="/albums">写真</RouterLink>
-          </a-menu-item>
+          <a-space direction="vertical">
+            <a-menu-item class="m-item">
+              <PictureOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+              <RouterLink to="/home" class="menu-font">画廊</RouterLink>
+            </a-menu-item>
+            <a-menu-item class="m-item">
+              <FolderOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+              <RouterLink to="/albums" class="menu-font">作品</RouterLink>
+            </a-menu-item>
+            <a-menu-item class="m-item">
+              <StarOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+              <RouterLink to="/stars" class="menu-font">收藏</RouterLink>
+            </a-menu-item>
+            <a-menu-item class="m-item">
+              <HeartOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+              <RouterLink to="/albums" class="menu-font">写真</RouterLink>
+            </a-menu-item>
+          </a-space>
         </a-menu>
       </a-layout-sider>
 
@@ -62,12 +106,49 @@ export default {
 </template>
 <style scoped>
 .logo {
-  color: white;
+  color: black;
   font-size: x-large;
+  font-family: Wawati SC;
+  text-decoration: none;
 }
 
-::v-deep(.ant-menu-item) {
+.header {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  height: 6.5%;
+  background-color: white;
+}
+
+.item {
+  color: black;
+  font-size: large;
+  font-family: Wawati SC;
+  background: none;
+}
+
+.doption {
+  font-family: Wawati SC;
+  text-decoration: none;
+}
+
+.menu-font {
   font-size: x-large;
-  margin: 20px 0;
+  font-family: Wawati SC;
+}
+
+a:link {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+a:active {
+  color: inherit;
 }
 </style>
