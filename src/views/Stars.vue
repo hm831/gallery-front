@@ -32,7 +32,7 @@ export default {
 };
 </script>
 <template>
-    <a-image-preview-group infinite>
+    <a-image-preview-group infinite :actions-layout="[]" :closable="false">
         <masonry-wall :items="items" :ssr-columns="1" :gap="5" :min-columns="setColumns" :max-columns:="10"
             column-width="300" v-if="loaded">
             <template #default="{ item }">

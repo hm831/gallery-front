@@ -7,7 +7,7 @@ export default {
         };
     },
     mounted() {
-        fetch('http://localhost:8000/albums/artwork/gallery/select?allage=true&r18=false&limit=50')
+        fetch('http://localhost:8000/cosplays/gallery/select?limit=100')
             .then(response => response.json())
             .then((data) => {
                 this.items = data;
@@ -17,14 +17,10 @@ export default {
         console.log(this.columns)
     },
     methods: {
-        img_info(title, author) {
-            const info = title + " " + author
-            return info
-        }
     },
     computed: {
         setColumns() {
-            return this.$route.query.columns == null ? 6 : this.$route.query.columns
+            return this.$route.query.columns == null ? 4 : this.$route.query.columns
         }
     }
 };

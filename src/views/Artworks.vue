@@ -7,9 +7,6 @@ export default {
         };
     },
     mounted() {
-        if (this.$route.query.columns == null) {
-            this.$route.query.columns = 6
-        }
         fetch('http://127.0.0.1:8000/albums/artwork/' + this.$route.params.id)
             .then(response => response.json())
             .then((data) => {
@@ -26,7 +23,7 @@ export default {
 };
 </script>
 <template>
-    <a-image-preview-group infinite>
+    <a-image-preview-group infinite :actions-layout="[]" :closable="false">
         <masonry-wall :items="items" :ssr-columns="1" :gap="5" :min-columns="setColumns" :max-columns:="10"
             column-width="300" v-if="loaded">
             <template #default="{ item }">

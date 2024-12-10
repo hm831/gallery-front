@@ -7,24 +7,16 @@ export default {
         };
     },
     mounted() {
-        fetch('http://localhost:8000/albums/artwork/gallery/select?allage=true&r18=false&limit=50')
+        fetch('http://localhost:8000/cosplays/photos/' + this.$route.params.id)
             .then(response => response.json())
             .then((data) => {
                 this.items = data;
-                console.log(this.items)
                 this.loaded = true;
             });
-        console.log(this.columns)
-    },
-    methods: {
-        img_info(title, author) {
-            const info = title + " " + author
-            return info
-        }
     },
     computed: {
         setColumns() {
-            return this.$route.query.columns == null ? 6 : this.$route.query.columns
+            return this.$route.query.columns == null ? 3 : this.$route.query.columns
         }
     }
 };
@@ -32,7 +24,7 @@ export default {
 <template>
     <a-image-preview-group infinite :actions-layout="[]" :closable="false">
         <masonry-wall :items="items" :ssr-columns="1" :gap="5" :min-columns="setColumns" :max-columns:="10"
-            column-width="300" :key="this.$route.query.columns" v-if="loaded">
+            column-width="300" v-if="loaded">
             <template #default="{ item }">
                 <div style="overflow: hidden;" class="container">
                     <a-image width="100%" :src="item.link" class="hover-border" />
@@ -43,18 +35,19 @@ export default {
 </template>
 
 <style>
-.hover-border {
+.hover {
     transition: transform 0.3s ease;
-    border-radius: 0;
+    width: 100%;
     display: block;
 }
 
-.hover-border:hover {
+.hover:hover {
     transform: scale(1.1);
 }
 
 .container:hover {
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.24);
     transition: box-shadow 0.3s ease;
+    ;
 }
 </style>

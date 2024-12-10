@@ -29,7 +29,12 @@ export default {
       return this.$route.path === '/' ||
         this.$route.path === '/home' ||
         this.$route.path === '/stars' ||
-        this.$route.matched[0].path === '/albums/artworks/:id'
+        this.$route.matched[0].path === '/albums/artworks/:id' ||
+        this.$route.matched[0].path === '/cosplays/photos/:id' ||
+        this.$route.path === '/cosplays/gallery'
+    },
+    columns12() {
+      return this.$route.matched[0].path === '/cosplays/photos/:id'
     }
   }
 }
@@ -47,6 +52,12 @@ export default {
             <a-dropdown @select="handleSelect">
               <a-button class="item">列数</a-button>
               <template #content>
+                <RouterLink to="?columns=1" class="doption">
+                  <a-doption v-if="columns12">1</a-doption>
+                </RouterLink>
+                <RouterLink to="?columns=2" class="doption">
+                  <a-doption v-if="columns12">2</a-doption>
+                </RouterLink>
                 <RouterLink to="?columns=3" class="doption">
                   <a-doption>3</a-doption>
                 </RouterLink>
@@ -93,10 +104,16 @@ export default {
                 <span class="menu-font">收藏</span>
               </a-menu-item>
             </RouterLink>
-            <RouterLink to="/albums">
+            <RouterLink to="/cosplays">
               <a-menu-item class="m-item">
                 <HeartOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
-                <span class="menu-font">写真</span>
+                <span class="menu-font">图集</span>
+              </a-menu-item>
+            </RouterLink>
+            <RouterLink to="/cosplays/gallery">
+              <a-menu-item class="m-item">
+                <HeartOutlined :style="{ fontSize: fontSize, marginRight: marginRight }" />
+                <span class="menu-font">Cosplay</span>
               </a-menu-item>
             </RouterLink>
           </a-space>
