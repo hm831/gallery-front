@@ -7,7 +7,7 @@ export default {
         };
     },
     mounted() {
-        fetch('http://127.0.0.1:8000/albums/artwork/' + this.$route.params.id)
+        fetch('http://'+this.host+':8000/albums/artwork/' + this.$route.params.id)
             .then(response => response.json())
             .then((data) => {
                 this.items = data;
@@ -24,11 +24,11 @@ export default {
 </script>
 <template>
     <a-image-preview-group infinite :actions-layout="[]" :closable="false">
-        <masonry-wall :items="items" :ssr-columns="1" :gap="5" :min-columns="setColumns" :max-columns:="10"
+        <masonry-wall :items="items" :ssr-columns="1" :gap="0" :min-columns="setColumns" :max-columns:="10"
             column-width="300" v-if="loaded">
             <template #default="{ item }">
                 <div style="overflow: hidden;" class="container">
-                    <a-image width="100%" :src="item.link" class="hover-border" />
+                    <a-image width="100%" :src="item.link" v-if="item.page_index == 0" class="hover-border" />
                 </div>
             </template>
         </masonry-wall>

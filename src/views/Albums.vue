@@ -7,7 +7,7 @@ export default {
         };
     },
     mounted() {
-        fetch('http://localhost:8000/albums/author/info/select?offset=0&limit=100')
+        fetch('http://'+this.host+':8000/albums/author/info/select?offset=0&limit=100')
             .then(response => response.json())
             .then((data) => {
                 this.items = data;
@@ -25,7 +25,7 @@ export default {
                 <template #cover>
                     <RouterLink :to="'/albums/artworks/' + item.authorId">
                         <div style="overflow: hidden;">
-                            <img :src="item.post"
+                            <img :src="item.cover"
                                 style="width: 100%; object-fit: cover; height: 250px; transition: transform 0.3s ease;"
                                 class="hover" />
                         </div>
@@ -33,7 +33,7 @@ export default {
                 </template>
                 <div>
                     <a-avatar :size="30" :style="{ marginRight: '8px' }">
-                        <img :src="item.profile">
+                        <img :src="item.avatar">
                     </a-avatar>
                     <a-typography-text style="font-weight: bold;">{{ item.name }}</a-typography-text>
                 </div>

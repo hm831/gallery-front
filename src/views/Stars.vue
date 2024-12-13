@@ -10,7 +10,7 @@ export default {
         if (this.$route.query.columns == null) {
             this.$route.query.columns = 5
         }
-        fetch('http://localhost:8000/illusts/select?offset=0&limit=100')
+        fetch('http://'+this.host+':8000/illusts/select?sfw=true&nsfw=true&r18=false&offset=0&limit=100')
             .then(response => response.json())
             .then((data) => {
                 this.items = data;
@@ -33,7 +33,7 @@ export default {
 </script>
 <template>
     <a-image-preview-group infinite :actions-layout="[]" :closable="false">
-        <masonry-wall :items="items" :ssr-columns="1" :gap="5" :min-columns="setColumns" :max-columns:="10"
+        <masonry-wall :items="items" :ssr-columns="1" :gap="0" :min-columns="setColumns" :max-columns:="10"
             column-width="300" v-if="loaded">
             <template #default="{ item }">
                 <div style="overflow: hidden;" class="container">

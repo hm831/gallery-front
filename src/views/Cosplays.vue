@@ -7,7 +7,7 @@ export default {
         };
     },
     mounted() {
-        fetch('http://localhost:8000/cosplays/select')
+        fetch('http://'+this.host+':8000/cosplays/select')
             .then(response => response.json())
             .then((data) => {
                 this.items = data;

@@ -11,9 +11,9 @@ import vue3PhotoPreview from 'vue3-photo-preview';
 import 'vue3-photo-preview/dist/index.css';
 
 
-
-
 const app = createApp(App);
+
+app.config.globalProperties.host = '192.168.3.3';
 
 // app.use(Antd);
 app.use(router);

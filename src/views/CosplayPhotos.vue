@@ -7,7 +7,7 @@ export default {
         };
     },
     mounted() {
-        fetch('http://localhost:8000/cosplays/photos/' + this.$route.params.id)
+        fetch('http://'+this.host+':8000/cosplays/photos/' + this.$route.params.id)
             .then(response => response.json())
             .then((data) => {
                 this.items = data;
@@ -16,14 +16,14 @@ export default {
     },
     computed: {
         setColumns() {
-            return this.$route.query.columns == null ? 3 : this.$route.query.columns
+            return this.$route.query.columns == null ? 4 : this.$route.query.columns
         }
     }
 };
 </script>
 <template>
     <a-image-preview-group infinite :actions-layout="[]" :closable="false">
-        <masonry-wall :items="items" :ssr-columns="1" :gap="5" :min-columns="setColumns" :max-columns:="10"
+        <masonry-wall :items="items" :ssr-columns="1" :gap="0" :min-columns="setColumns" :max-columns:="10"
             column-width="300" v-if="loaded">
             <template #default="{ item }">
                 <div style="overflow: hidden;" class="container">
